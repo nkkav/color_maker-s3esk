@@ -1,0 +1,13 @@
+
+NET "clk"       LOC = "C9";
+NET "rst"       LOC = "K17";
+
+NET "red"       LOC = "H14";
+NET "green"     LOC = "H15";
+NET "blue"      LOC = "G15";
+NET "hs"        LOC = "F15";
+NET "vs"        LOC = "F14";
+
+NET "sldsw<0>"  LOC = "L13";
+NET "sldsw<1>"  LOC = "L14";
+NET "sldsw<2>"  LOC = "H18";
