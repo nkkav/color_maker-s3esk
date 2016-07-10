@@ -15,9 +15,14 @@
 +-------------------+----------------------------------------------------------+
 | **Release Date**  | 10 July 2016                                             |
 +-------------------+----------------------------------------------------------+
-| **Version**       | 1.0.2                                                    |
+| **Version**       | 1.1.0                                                    |
 +-------------------+----------------------------------------------------------+
 | **Rev. history**  |                                                          |
++-------------------+----------------------------------------------------------+
+|        **v1.1.0** | 2016-07-10                                               |
+|                   |                                                          |
+|                   | GHDL simulation scripts and generation of log file for   |
+|                   | VGA simulation.                                          |
 +-------------------+----------------------------------------------------------+
 |        **v1.0.2** | 2016-07-10                                               |
 |                   |                                                          |
@@ -94,8 +99,15 @@ The ``color_maker`` distribution includes the following files:
 +-----------------------+------------------------------------------------------+
 | color_maker_top.vhd   | The top-level RTL VHDL design file.                  |
 +-----------------------+------------------------------------------------------+
+| color_maker_top_tb.vhd| Testbench for the top-level RTL VHDL design file.    |
++-----------------------+------------------------------------------------------+
 | color_maker_top-syn.sh| Bash shell script for synthesizing the               |
 |                       | ``color_maker`` design with Xilinx ISE.              |
++-----------------------+------------------------------------------------------+
+| ghdl.mk               | Makefile for VHDL simulation with GHDL.              |
++-----------------------+------------------------------------------------------+
+| ghdl.sh               | Bash shell script for running the simulation with    |
+|                       | GHDL.                                                |
 +-----------------------+------------------------------------------------------+
 | impact_s3esk.bat      | Windows Batch file for automatically invoking Xilinx |
 |                       | IMPACT in order to download the generated bitstream  |
@@ -121,7 +133,29 @@ to specify the following for adapting to the user's setup:
 - ``arch``: specific FPGA architecture (device family) to be used for synthesis
 - ``part``: specific FPGA part (device) to be used for synthesis
 
-3.1. Running the synthesis script
+3.1. Running the simulation script
+----------------------------------
+
+This step assumes that the GHDL executable is in the user's ``$PATH``, e.g., by 
+using:
+
+| ``export PATH=/path/to/ghld/bin:$PATH``
+
+Then the simulation shell script can be run from a UNIX/Linux/Cygwin command line:
+
+| ``$./ghdl.sh``
+
+This will produce a text file named ``color_maker_top_results.txt`` with the values 
+of current time whenever a clock event occurs (as integer) and the signals ``hs``, 
+``vs``, ``red``, ``green`` and ``blue`` (as binary). This can be used by an external 
+tool, the VGA simulator (http://ericeastwood.com/lab/vga-simulator/) for visualizing 
+the outcome if a VGA/CRT monitor would be driven. A downloadable version of the 
+VGA simulator also exists: https://github.com/MadLittleMods/vga-simulator
+
+In order to work with the VGA simulator without further changes, the red, green and 
+blue signals are extended to 3, 3, and 2 bits, respectively in the testbench.
+
+3.2. Running the synthesis script
 ---------------------------------
 
 For running the Xilinx ISE synthesis tool, generating FPGA configuration 
@@ -185,6 +219,11 @@ the target FPGA device:
 ================
 
 - [suggested] MinGW environment on Windows 7 (64-bit).
+
+- [suggested] GHDL simulator: http://ghdl.free.fr
+  The 0.33 version on Linux Ubuntu 16.04 LTS was used.
+
+- [optional] The VGA simulator: http://ericeastwood.com/lab/vga-simulator/
 
 - Xilinx ISE (free ISE webpack is available from the Xilinx website): 
   http://www.xilinx.com.

@@ -366,10 +366,16 @@ ul.auto-toc {
 <td>10 July 2016</td>
 </tr>
 <tr><td><strong>Version</strong></td>
-<td>1.0.2</td>
+<td>1.1.0</td>
 </tr>
 <tr><td><strong>Rev. history</strong></td>
 <td>&nbsp;</td>
+</tr>
+<tr><td><strong>v1.1.0</strong></td>
+<td><p class="first">2016-07-10</p>
+<p class="last">GHDL simulation scripts and generation of log file for
+VGA simulation.</p>
+</td>
 </tr>
 <tr><td><strong>v1.0.2</strong></td>
 <td><p class="first">2016-07-10</p>
@@ -503,9 +509,19 @@ device.</td>
 <tr><td>color_maker_top.vhd</td>
 <td>The top-level RTL VHDL design file.</td>
 </tr>
+<tr><td>color_maker_top_tb.vhd</td>
+<td>Testbench for the top-level RTL VHDL design file.</td>
+</tr>
 <tr><td>color_maker_top-syn.sh</td>
 <td>Bash shell script for synthesizing the
 <tt class="docutils literal">color_maker</tt> design with Xilinx ISE.</td>
+</tr>
+<tr><td>ghdl.mk</td>
+<td>Makefile for VHDL simulation with GHDL.</td>
+</tr>
+<tr><td>ghdl.sh</td>
+<td>Bash shell script for running the simulation with
+GHDL.</td>
 </tr>
 <tr><td>impact_s3esk.bat</td>
 <td>Windows Batch file for automatically invoking Xilinx
@@ -535,8 +551,28 @@ installation where the <tt class="docutils literal">xst.exe</tt> executable is p
 <li><tt class="docutils literal">arch</tt>: specific FPGA architecture (device family) to be used for synthesis</li>
 <li><tt class="docutils literal">part</tt>: specific FPGA part (device) to be used for synthesis</li>
 </ul>
+<div class="section" id="running-the-simulation-script">
+<h2>3.1. Running the simulation script</h2>
+<p>This step assumes that the GHDL executable is in the user's <tt class="docutils literal">$PATH</tt>, e.g., by
+using:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal">export <span class="pre">PATH=/path/to/ghld/bin:$PATH</span></tt></div>
+</div>
+<p>Then the simulation shell script can be run from a UNIX/Linux/Cygwin command line:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">$./ghdl.sh</span></tt></div>
+</div>
+<p>This will produce a text file named <tt class="docutils literal">color_maker_top_results.txt</tt> with the values
+of current time whenever a clock event occurs (as integer) and the signals <tt class="docutils literal">hs</tt>,
+<tt class="docutils literal">vs</tt>, <tt class="docutils literal">red</tt>, <tt class="docutils literal">green</tt> and <tt class="docutils literal">blue</tt> (as binary). This can be used by an external
+tool, the VGA simulator (<a class="reference external" href="http://ericeastwood.com/lab/vga-simulator/">http://ericeastwood.com/lab/vga-simulator/</a>) for visualizing
+the outcome if a VGA/CRT monitor would be driven. A downloadable version of the
+VGA simulator also exists: <a class="reference external" href="https://github.com/MadLittleMods/vga-simulator">https://github.com/MadLittleMods/vga-simulator</a></p>
+<p>In order to work with the VGA simulator without further changes, the red, green and
+blue signals are extended to 3, 3, and 2 bits, respectively in the testbench.</p>
+</div>
 <div class="section" id="running-the-synthesis-script">
-<h2>3.1. Running the synthesis script</h2>
+<h2>3.2. Running the synthesis script</h2>
 <p>For running the Xilinx ISE synthesis tool, generating FPGA configuration
 bistream and downloading to the target device, execute the corresponding script
 from within the <tt class="docutils literal"><span class="pre">color_maker-s3esk</span></tt> directory:</p>
@@ -607,6 +643,9 @@ the target FPGA device:</p>
 <h1>4. Prerequisites</h1>
 <ul class="simple">
 <li>[suggested] MinGW environment on Windows 7 (64-bit).</li>
+<li>[suggested] GHDL simulator: <a class="reference external" href="http://ghdl.free.fr">http://ghdl.free.fr</a>
+The 0.33 version on Linux Ubuntu 16.04 LTS was used.</li>
+<li>[optional] The VGA simulator: <a class="reference external" href="http://ericeastwood.com/lab/vga-simulator/">http://ericeastwood.com/lab/vga-simulator/</a></li>
 <li>Xilinx ISE (free ISE webpack is available from the Xilinx website):
 <a class="reference external" href="http://www.xilinx.com">http://www.xilinx.com</a>.
 The 14.6 version on Windows 7/64-bit is known to work.</li>
