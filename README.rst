@@ -13,11 +13,15 @@
 +-------------------+----------------------------------------------------------+
 | **Website**       | http://www.nkavvadias.com                                |
 +-------------------+----------------------------------------------------------+
-| **Release Date**  | 10 July 2016                                             |
+| **Release Date**  | 08 August 2016                                           |
 +-------------------+----------------------------------------------------------+
-| **Version**       | 1.1.0                                                    |
+| **Version**       | 1.1.1                                                    |
 +-------------------+----------------------------------------------------------+
 | **Rev. history**  |                                                          |
++-------------------+----------------------------------------------------------+
+|        **v1.1.1** | 2016-08-08                                               |
+|                   |                                                          |
+|                   | Added clean-up script.                                   |
 +-------------------+----------------------------------------------------------+
 |        **v1.1.0** | 2016-07-10                                               |
 |                   |                                                          |
@@ -90,6 +94,8 @@ The ``color_maker`` distribution includes the following files:
 +-----------------------+------------------------------------------------------+
 | README.pdf            | PDF version of README.rst.                           |
 +-----------------------+------------------------------------------------------+
+| clean.sh              | A bash script for cleaning simulation artifacts.     |
++-----------------------+------------------------------------------------------+
 | clockdiv.vhd          | Configurable, portable, clock divider.               |
 +-----------------------+------------------------------------------------------+
 | color_maker.vhd       | Color assignment logic.                              |
@@ -139,11 +145,11 @@ to specify the following for adapting to the user's setup:
 This step assumes that the GHDL executable is in the user's ``$PATH``, e.g., by 
 using:
 
-| ``export PATH=/path/to/ghld/bin:$PATH``
+| ``$ export PATH=/path/to/ghld/bin:$PATH``
 
 Then the simulation shell script can be run from a UNIX/Linux/Cygwin command line:
 
-| ``$./ghdl.sh``
+| ``$ ./ghdl.sh``
 
 This will produce a text file named ``color_maker_top_results.txt`` with the values 
 of current time whenever a clock event occurs (as integer) and the signals ``hs``, 
@@ -214,11 +220,16 @@ the target FPGA device:
 
 | ``exit``
 
+To clean up simulation artifacts, including the generated diagnostics file, use 
+the ``clean.sh`` script:
+
+| ``$ ./clean.sh``
+
 
 4. Prerequisites
 ================
 
-- [suggested] MinGW environment on Windows 7 (64-bit).
+- [suggested] Linux (e.g., Ubuntu 16.04 LTS) or MinGW environment on Windows 7 (64-bit).
 
 - [suggested] GHDL simulator: http://ghdl.free.fr
   The 0.33 version on Linux Ubuntu 16.04 LTS was used.

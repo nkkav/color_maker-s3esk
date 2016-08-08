@@ -363,13 +363,18 @@ ul.auto-toc {
 <td><a class="reference external" href="http://www.nkavvadias.com">http://www.nkavvadias.com</a></td>
 </tr>
 <tr><td><strong>Release Date</strong></td>
-<td>10 July 2016</td>
+<td>08 August 2016</td>
 </tr>
 <tr><td><strong>Version</strong></td>
-<td>1.1.0</td>
+<td>1.1.1</td>
 </tr>
 <tr><td><strong>Rev. history</strong></td>
 <td>&nbsp;</td>
+</tr>
+<tr><td><strong>v1.1.1</strong></td>
+<td><p class="first">2016-08-08</p>
+<p class="last">Added clean-up script.</p>
+</td>
 </tr>
 <tr><td><strong>v1.1.0</strong></td>
 <td><p class="first">2016-07-10</p>
@@ -496,6 +501,9 @@ For <a class="reference external" href="mailto:800x600&#64;72Hz">800x600&#64;72H
 <tr><td>README.pdf</td>
 <td>PDF version of README.rst.</td>
 </tr>
+<tr><td>clean.sh</td>
+<td>A bash script for cleaning simulation artifacts.</td>
+</tr>
 <tr><td>clockdiv.vhd</td>
 <td>Configurable, portable, clock divider.</td>
 </tr>
@@ -556,11 +564,11 @@ installation where the <tt class="docutils literal">xst.exe</tt> executable is p
 <p>This step assumes that the GHDL executable is in the user's <tt class="docutils literal">$PATH</tt>, e.g., by
 using:</p>
 <div class="line-block">
-<div class="line"><tt class="docutils literal">export <span class="pre">PATH=/path/to/ghld/bin:$PATH</span></tt></div>
+<div class="line"><tt class="docutils literal">$ export <span class="pre">PATH=/path/to/ghld/bin:$PATH</span></tt></div>
 </div>
 <p>Then the simulation shell script can be run from a UNIX/Linux/Cygwin command line:</p>
 <div class="line-block">
-<div class="line"><tt class="docutils literal"><span class="pre">$./ghdl.sh</span></tt></div>
+<div class="line"><tt class="docutils literal">$ ./ghdl.sh</tt></div>
 </div>
 <p>This will produce a text file named <tt class="docutils literal">color_maker_top_results.txt</tt> with the values
 of current time whenever a clock event occurs (as integer) and the signals <tt class="docutils literal">hs</tt>,
@@ -637,12 +645,17 @@ the target FPGA device:</p>
 <div class="line-block">
 <div class="line"><tt class="docutils literal">exit</tt></div>
 </div>
+<p>To clean up simulation artifacts, including the generated diagnostics file, use
+the <tt class="docutils literal">clean.sh</tt> script:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal">$ ./clean.sh</tt></div>
+</div>
 </div>
 </div>
 <div class="section" id="prerequisites">
 <h1>4. Prerequisites</h1>
 <ul class="simple">
-<li>[suggested] MinGW environment on Windows 7 (64-bit).</li>
+<li>[suggested] Linux (e.g., Ubuntu 16.04 LTS) or MinGW environment on Windows 7 (64-bit).</li>
 <li>[suggested] GHDL simulator: <a class="reference external" href="http://ghdl.free.fr">http://ghdl.free.fr</a>
 The 0.33 version on Linux Ubuntu 16.04 LTS was used.</li>
 <li>[optional] The VGA simulator: <a class="reference external" href="http://ericeastwood.com/lab/vga-simulator/">http://ericeastwood.com/lab/vga-simulator/</a></li>
