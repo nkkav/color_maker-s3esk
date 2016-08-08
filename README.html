@@ -578,6 +578,11 @@ the outcome if a VGA/CRT monitor would be driven. A downloadable version of the
 VGA simulator also exists: <a class="reference external" href="https://github.com/MadLittleMods/vga-simulator">https://github.com/MadLittleMods/vga-simulator</a></p>
 <p>In order to work with the VGA simulator without further changes, the red, green and
 blue signals are extended to 3, 3, and 2 bits, respectively in the testbench.</p>
+<p>To clean up simulation artifacts, including the generated diagnostics file, use
+the <tt class="docutils literal">clean.sh</tt> script:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal">$ ./clean.sh</tt></div>
+</div>
 </div>
 <div class="section" id="running-the-synthesis-script">
 <h2>3.2. Running the synthesis script</h2>
@@ -644,11 +649,6 @@ the target FPGA device:</p>
 </ol>
 <div class="line-block">
 <div class="line"><tt class="docutils literal">exit</tt></div>
-</div>
-<p>To clean up simulation artifacts, including the generated diagnostics file, use
-the <tt class="docutils literal">clean.sh</tt> script:</p>
-<div class="line-block">
-<div class="line"><tt class="docutils literal">$ ./clean.sh</tt></div>
 </div>
 </div>
 </div>

@@ -161,6 +161,11 @@ VGA simulator also exists: https://github.com/MadLittleMods/vga-simulator
 In order to work with the VGA simulator without further changes, the red, green and 
 blue signals are extended to 3, 3, and 2 bits, respectively in the testbench.
 
+To clean up simulation artifacts, including the generated diagnostics file, use 
+the ``clean.sh`` script:
+
+| ``$ ./clean.sh``
+
 3.2. Running the synthesis script
 ---------------------------------
 
@@ -219,11 +224,6 @@ the target FPGA device:
 6. Exit IMPACT.
 
 | ``exit``
-
-To clean up simulation artifacts, including the generated diagnostics file, use 
-the ``clean.sh`` script:
-
-| ``$ ./clean.sh``
 
 
 4. Prerequisites
