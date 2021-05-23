@@ -33,8 +33,6 @@ architecture tb_arch of color_maker_top_tb is
   signal blue  : std_logic;
   signal vs    : std_logic;
   signal hs    : std_logic;
-  -- Profiling signals
-  signal ncycles : integer;
   -- Constant declarations
   constant CLK_PERIOD : time := 20 ns;
   -- Declare results file
@@ -65,65 +63,68 @@ begin
 
   RST_STIM: process
   begin
-    rst   <= 'U';
-    sldsw <= "UUU";
-    wait for CLK_PERIOD;
     rst   <= '1';
-    sldsw <= "UUU";
     wait for CLK_PERIOD;
     rst   <= '0';
-    sldsw <= "010";
-    wait for 2400000*CLK_PERIOD;
+    wait for 8*415000*CLK_PERIOD;
   end process RST_STIM;
 
-  PROFILING: process(clk, rst)
+  DATA_STIM: process
+    variable line_el: line;
   begin
-    if (rst = '1') then
-      ncycles <= 0;
-    elsif (rising_edge(clk)) then
-      ncycles <= ncycles + 1;
+    sldsw <= "000";
+    wait for 2*CLK_PERIOD;
+    -- cycle through all colors, one frame each
+    for color in 1 to 8 loop
+      wait for 415000*CLK_PERIOD;
+      sldsw <= std_logic_vector(to_unsigned(color, 3));
+--      write(line_el, 'c');
+--      write(line_el, color);
+
+      -- Write the hsync
+--      write(line_el, 's');
+--      write(line_el, sldsw);
+--      writeline(ResultsFile, line_el);
+--      wait for 415000*CLK_PERIOD;
+    end loop;
+  end process DATA_STIM;
+
+  process (clk)
+    variable line_el: line;
+    variable red_ext   : std_logic_vector(2 downto 0);
+    variable green_ext : std_logic_vector(2 downto 0);
+    variable blue_ext  : std_logic_vector(1 downto 0);
+  begin
+    if rising_edge(clk) then
+      -- Write the time
+      write(line_el, now);
+      write(line_el, ':');
+
+      -- Write the hsync
+      write(line_el, ' ');
+      write(line_el, hs);
+
+      -- Write the vsync
+      write(line_el, ' ');
+      write(line_el, vs);
+
+      -- Write the red component
+      red_ext := red & red & red;
+      write(line_el, ' ');
+      write(line_el, red_ext);
+
+      -- Write the green component
+      green_ext := green & green & green;
+      write(line_el, ' ');
+      write(line_el, green_ext);
+
+      -- Write the blue component
+      blue_ext := blue & blue;
+      write(line_el, ' ');
+      write(line_el, blue_ext);
+
+      writeline(ResultsFile, line_el);
     end if;
-  end process PROFILING;
-
-process (clk)
-  variable line_el: line;
-  variable red_ext   : std_logic_vector(2 downto 0);
-  variable green_ext : std_logic_vector(2 downto 0);
-  variable blue_ext  : std_logic_vector(1 downto 0);
-begin
-  if rising_edge(clk) then
-
-    -- Write the time
-    write(line_el, now);   -- write the line
-    write(line_el, ':');   -- write the line
-
-    -- Write the hsync
-    write(line_el, ' ');
-    write(line_el, hs);    -- write the line
-
-    -- Write the vsync
-    write(line_el, ' ');
-    write(line_el, vs);    -- write the line
-
-    -- Write the red component
-    red_ext := red & red & red;
-    write(line_el, ' ');
-    write(line_el, red_ext);   -- write the line
-
-    -- Write the green component
-    green_ext := green & green & green;
-    write(line_el, ' ');
-    write(line_el, green_ext); -- write the line
-
-    -- Write the blue component
-    blue_ext := blue & blue;
-    write(line_el, ' ');
-    write(line_el, blue_ext);  -- write the line
-
-    writeline(ResultsFile, line_el); -- write the contents into the file
-
-  end if;
-end process;
+  end process;
 
 end tb_arch;
-
