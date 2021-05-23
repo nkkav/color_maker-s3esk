@@ -1,8 +1,8 @@
 library IEEE, STD;
 use STD.textio.all;
-use IEEE.std_logic_textio.all;
+use IEEE.std_logic_textio.all; -- needs VHDL-2008
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
 
 
 entity color_maker_top_tb is

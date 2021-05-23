@@ -3,7 +3,7 @@
 -- 
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
 
 
 entity vga_controller is
@@ -59,8 +59,8 @@ architecture behavioral of vga_controller is
   -- Signals
   signal nextHsync  : std_logic;
   signal nextVsync  : std_logic;
-  signal vCounter   : std_logic_vector(10 downto 0) := (others => '0');
-  signal hCounter   : std_logic_vector(11 downto 0) := (others => '0');   
+  signal vCounter   : unsigned(10 downto 0) := (others => '0');
+  signal hCounter   : unsigned(11 downto 0) := (others => '0');
   --
 begin
 
@@ -69,8 +69,8 @@ begin
     if rising_edge(clk) then
       hs   <= nextHsync;
       vs   <= nextVsync;
-      hpix <= hCounter(9 downto 0);
-      vpix <= vCounter(9 downto 0);
+      hpix <= std_logic_vector(hCounter(9 downto 0));
+      vpix <= std_logic_vector(vCounter(9 downto 0));
       --
       if ((hCounter < hVisible) and (vCounter < vVisible)) then
         blank <= '1';
