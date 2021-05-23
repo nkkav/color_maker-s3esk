@@ -1,5 +1,5 @@
 # Filename: ghdl.sh
-# Author: Nikolaos Kavvadias (C) 2016
+# Author: Nikolaos Kavvadias (C) 2016-2021
 
 #!/bin/bash
 
@@ -14,4 +14,3 @@ else
   units=seconds
 fi
 echo "This script has been running for $SECONDS $units."
-exit 0
