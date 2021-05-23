@@ -5,6 +5,44 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
+--
+-- VGA configuration parameters
+--
+-------------------------------------------
+-- CONFIG #1: 640x480 @ 60Hz
+-- Clock: 25MHz
+-- ----------------------------------------
+-- Name     Description              Cycles
+-- ----------------------------------------
+-- H_S      Horizontal sync pulse     800
+-- H_DISP   Horizontal display        640
+-- H_FP     Horizontal front porch     16
+-- H_PW     Horizontal pulse width     96
+-- H_BP     Horizontal back porch      48
+-- V_S      Vertical sync pulse       521
+-- V_DISP   Vertical display          480
+-- V_FP     Vertical front porch       10
+-- V_PW     Vertical pulse width        2
+-- V_BP     Vertical back porch        29
+-- ----------------------------------------
+--
+-------------------------------------------
+-- CONFIG #2: 800x600 @ 72Hz
+-- Clock: 50MHz
+-- ----------------------------------------
+-- Name     Description              Cycles
+-- ----------------------------------------
+-- H_S      Horizontal sync pulse    1040
+-- H_DISP   Horizontal display        800
+-- H_FP     Horizontal front porch     56
+-- H_PW     Horizontal pulse width    120
+-- H_BP     Horizontal back porch      64
+-- V_S      Vertical sync pulse       666
+-- V_DISP   Vertical display          600
+-- V_FP     Vertical front porch       37
+-- V_PW     Vertical pulse width        6
+-- V_BP     Vertical back porch        23
+-- ----------------------------------------
 
 entity vga_controller is
   generic (
